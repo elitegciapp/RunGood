@@ -26,7 +26,7 @@ export interface WorkoutSession {
   scheduledDate: string | null; // YYYY-MM-DD or null
   sessionType: SessionType;
   durationMinutes: number;
-  workoutStyle: Exclude<WorkoutStyle, 'bareMinimum'>;
+  workoutStyle: WorkoutStyle;
   completed: boolean;
   skipped: boolean;
   completionSource: 'manual' | 'appleHealth' | 'appleWatch' | null;

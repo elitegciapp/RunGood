@@ -3,8 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 
 import { PrimaryButton } from '../../src/components/PrimaryButton';
-import { getPlanPreferences, setOnboardingCompleted } from '../../src/db/database';
-import { generateInitialPlan } from '../../src/logic/planGenerator';
+import { createInitialTrainingPlan, setOnboardingCompleted } from '../../src/db/database';
 
 export default function ReviewScreen() {
   const [saving, setSaving] = React.useState(false);
@@ -12,11 +11,7 @@ export default function ReviewScreen() {
   async function onFinish() {
     setSaving(true);
 
-    const prefs = await getPlanPreferences();
-    generateInitialPlan(prefs);
-
-    // NOTE: Plan persistence is intentionally not implemented yet.
-    // This is a stub to confirm routing + local persistence.
+    await createInitialTrainingPlan();
 
     await setOnboardingCompleted(true);
     router.replace('/(tabs)/today');
